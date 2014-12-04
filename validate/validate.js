@@ -48,7 +48,7 @@ function validate(value, options) {
     delete options.trim;
 
     if (options.required && _.isEmpty(value)) {
-        throw String.format(L('validate_required', '%s is required.'), options.label);
+        throw String.format(L('validate_required', '%s is required'), options.label);
     }
     
     delete options.required;
@@ -64,7 +64,7 @@ function validate(value, options) {
         switch (key) {
             
             case 'email':
-                var email = /^([^\x00-\x20\x22\x28\x29\x2c\x2e\x3a-\x3c\x3e\x40\x5b-\x5d\x7f-\xff]+|\x22([^\x0d\x22\x5c\x80-\xff]|\x5c[\x00-\x7f])*\x22)(\x2e([^\x00-\x20\x22\x28\x29\x2c\x2e\x3a-\x3c\x3e\x40\x5b-\x5d\x7f-\xff]+|\x22([^\x0d\x22\x5c\x80-\xff]|\x5c[\x00-\x7f])*\x22))*\x40([^\x00-\x20\x22\x28\x29\x2c\x2e\x3a-\x3c\x3e\x40\x5b-\x5d\x7f-\xff]+|\x5b([^\x0d\x5b-\x5d\x80-\xff]|\x5c[\x00-\x7f])*\x5d)(\x2e([^\x00-\x20\x22\x28\x29\x2c\x2e\x3a-\x3c\x3e\x40\x5b-\x5d\x7f-\xff]+|\x5b([^\x0d\x5b-\x5d\x80-\xff]|\x5c[\x00-\x7f])*\x5d))*$/;
+                var email = /^([^@\s]+)@((?:[-a-z0-9]+\.)+[a-z]{2,})$/i;
                 if (!email.test(value)) throw String.format(L('validate_email', '%s is no email address.'), options.label);
                 break;
                 
@@ -74,6 +74,21 @@ function validate(value, options) {
                 
             case 'numeric':
                 if (!_.isFinite(value)) throw String.format(L('validate_numeric', '%s is not a number.'), options.label);
+                break;
+                
+            case 'password':
+                if (value.length < 6)
+                    throw L('validate_password', 'Enter a valid password of 6 or more characters');
+                break;
+                
+            case 'match':
+                if (!(value === options.match))
+                    throw L('validate_match', 'Password doesn\'t match confirmation');
+                break;
+                
+            case 'zipcode':
+                if (!_.isFinite(value) || value.length != 5)
+                    throw L('validate_zipcode', 'Enter a valid zip code');
                 break;
         }
        
