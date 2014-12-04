@@ -64,7 +64,7 @@ exports.transaction = function transaction(transactionId, affiliation, revenue, 
 
 exports.tracker = function tracker() {
   return init();
-}
+};
 
 exports.logLevel = function logLevel(mode) {
   init();

@@ -30,7 +30,7 @@ exports.infect = function(scope) {
 	scope.ENV_DEVELOPMENT = scope.ENV_DEV = ENV_DEVELOPMENT;
 	scope.ENV_TEST = ENV_TEST;
 	scope.EVN_PRODUCTION = scope.ENV_PROD = ENV_PRODUCTION;
-}
+};
 
 function isTabletFallback() {
 	return !(Math.min(

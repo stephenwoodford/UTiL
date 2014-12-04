@@ -6,7 +6,7 @@ function crop(blob, options, height) {
         options = {
             width: options,
             height: height
-        }
+        };
     }
     
     if (!blob.width || !blob.width) {
@@ -47,7 +47,7 @@ function crop(blob, options, height) {
             blob = blob.imageAsResized(options.width, options.height);
         }
         
-        return blob
+        return blob;
         
     } else {
         return blob.imageAsCropped(options);
